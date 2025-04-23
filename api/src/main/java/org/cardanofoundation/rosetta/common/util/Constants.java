@@ -24,17 +24,20 @@ public class Constants {
   public static final String KEY_REFUNDS_SUM = "keyRefundsSum";
   public static final String KEY_DEPOSITS_SUM = "keyDepositsSum";
   public static final String POOL_DEPOSITS_SUM = "poolDepositsSum";
-  public static final String CARDANO_BLOCKCHAIN = "cardano";
+  public static final String CARDANO_BLOCKCHAIN = "prime";
   public static final int MAINNET_NETWORK_MAGIC = 764824073;
   public static final int PREPROD_NETWORK_MAGIC = 1;
   public static final int PREVIEW_NETWORK_MAGIC = 2;
   public static final int SANCHONET_NETWORK_MAGIC = 4;
   public static final int DEVKIT_NETWORK_MAGIC = 42;
+  public static final int PRIME_PUBLIC_TESTNET_NETWORK_MAGIC = 3311;
+
+  public static final int OPERATION_TYPE_VOTE_DELEGATION = 43;
 
   private Constants() {
   }
 
-  public static final String CARDANO = "cardano";
+  public static final String CARDANO = "prime";
   public static final byte STAKE_KEY_HASH_HEADER_KIND = (byte) -32;
 
   public static final int PREFIX_LENGTH = 10;
@@ -61,6 +64,8 @@ public class Constants {
   public static final String POLICY_ID_VALIDATION = "^[0-9a-fA-F]{" + POLICY_ID_LENGTH + "}$";
 
   public static final Integer SIGNATURE_LENGTH = 128;
+
+  public static final long MIN_DUMMY_FEE = 170_000L;
 
   // Shelley
   public static final Long DEFAULT_POOL_DEPOSIT = 500000000L;
@@ -96,10 +101,12 @@ public class Constants {
           OperationType.STAKE_KEY_REGISTRATION.getValue(),
           OperationType.STAKE_KEY_DEREGISTRATION.getValue(),
           OperationType.WITHDRAWAL.getValue());
+
   public static final List<String> POOL_OPERATIONS =
       List.of(OperationType.POOL_RETIREMENT.getValue(),
           OperationType.POOL_REGISTRATION.getValue(),
           OperationType.POOL_REGISTRATION_WITH_CERT.getValue());
+
   public static final List<String> STAKE_POOL_OPERATIONS =
       List.of(OperationType.STAKE_DELEGATION.getValue(),
           OperationType.STAKE_KEY_REGISTRATION.getValue(),
@@ -107,6 +114,7 @@ public class Constants {
           OperationType.POOL_RETIREMENT.getValue(),
           OperationType.POOL_REGISTRATION.getValue(),
           OperationType.POOL_REGISTRATION_WITH_CERT.getValue());
+
   public static final List<String> VOTE_OPERATIONS =
       List.of(OperationType.VOTE_REGISTRATION.getValue());
 
@@ -121,6 +129,12 @@ public class Constants {
   public static final String OPERATION_TYPE_POOL_RETIREMENT = "poolRetirement";
   public static final String OPERATION_TYPE_VOTE_REGISTRATION = "voteRegistration";
 
+  public static final List<String> GOVERNANCE_OPERATIONS = List.of(
+        OperationType.VOTE_DREP_DELEGATION.getValue()
+  );
+
+  // Plomin hard fork governance related
+  public static final String OPERATION_TYPE_DREP_VOTE_DELEGATION = "dRepVoteDelegation";
 
   public static final Integer ED_25519_KEY_SIGNATURE_BYTE_LENGTH = 64;
 
@@ -196,6 +210,7 @@ public class Constants {
   public static final String LOVELACE = "lovelace";
   public static final String DEVKIT = "devkit";
   public static final String SANCHONET = "sanchonet";
+  public static final String PRIME_PUBLIC_TESTNET = "prime-public-testnet";
 
   public static final String ROSETTA_API_PATH = "classpath:/rosetta-specifications-1.4.15/api.yaml";
 }

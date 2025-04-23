@@ -1,5 +1,8 @@
 package org.cardanofoundation.rosetta.common.enumeration;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 import lombok.Getter;
 
 import com.bloxbean.cardano.client.common.model.Network;
@@ -14,7 +17,8 @@ public enum NetworkEnum {
     PREPROD(Constants.PREPROD, Networks.preprod()),
     DEVNET(Constants.DEVKIT, new Network(0b0000, 42)),
     PREVIEW(Constants.PREVIEW, Networks.preview()),
-    SANCHONET(Constants.SANCHONET, new Network(0b0000,  4));
+    SANCHONET(Constants.SANCHONET, new Network(0b0000,  4)),
+    PRIME_PUBLIC_TESTNET(Constants.PRIME_PUBLIC_TESTNET, new Network(0b0000,  3311));
 
     private final String name;
     private final Network network;
@@ -28,22 +32,12 @@ public enum NetworkEnum {
         return network;
     }
 
-    public static NetworkEnum findByName(String name) {
-        for (NetworkEnum b : NetworkEnum.values()) {
-            if (b.name.equals(name)) {
-                return b;
-            }
-        }
-        return null;
+    public static Optional<NetworkEnum> findByName(String name) {
+        return Arrays.stream(NetworkEnum.values()).filter(b -> b.name.equals(name)).findFirst();
     }
 
-    public static NetworkEnum findByProtocolMagic(long protocolMagic) {
-        for (NetworkEnum b : NetworkEnum.values()) {
-            if (b.network.getProtocolMagic() == protocolMagic) {
-                return b;
-            }
-        }
-        return null;
+    public static Optional<NetworkEnum> findByProtocolMagic(long protocolMagic) {
+        return Arrays.stream(NetworkEnum.values()).filter(b -> b.network.getProtocolMagic() == protocolMagic).findFirst();
     }
 
 }

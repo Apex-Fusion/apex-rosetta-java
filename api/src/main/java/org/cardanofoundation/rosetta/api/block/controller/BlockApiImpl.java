@@ -34,8 +34,8 @@ public class BlockApiImpl implements BlockApi {
 
   @Override
   public ResponseEntity<BlockResponse> block(@RequestBody BlockRequest blockRequest) {
-    if(offlineMode) {
-      throw ExceptionFactory.NotSupportedInOfflineMode();
+    if (offlineMode) {
+      throw ExceptionFactory.notSupportedInOfflineMode();
     }
     networkService.verifyNetworkRequest(blockRequest.getNetworkIdentifier());
 
@@ -51,8 +51,8 @@ public class BlockApiImpl implements BlockApi {
   @Override
   public ResponseEntity<BlockTransactionResponse> blockTransaction(
       @RequestBody BlockTransactionRequest blockReq) {
-    if(offlineMode) {
-      throw ExceptionFactory.NotSupportedInOfflineMode();
+    if (offlineMode) {
+      throw ExceptionFactory.notSupportedInOfflineMode();
     }
     networkService.verifyNetworkRequest(blockReq.getNetworkIdentifier());
 
@@ -63,6 +63,6 @@ public class BlockApiImpl implements BlockApi {
     BlockTx blockTx = blockService.getBlockTransaction(blockId, blockHash, txHash);
 
     return ResponseEntity.ok(mapper.mapToBlockTransactionResponse(blockTx));
-
   }
+
 }

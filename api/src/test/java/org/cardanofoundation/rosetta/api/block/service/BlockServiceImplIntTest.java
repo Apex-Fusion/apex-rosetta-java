@@ -55,7 +55,6 @@ class BlockServiceImplIntTest extends IntegrationTest {
     assertEquals(simpleTx.txHash(), receiverUtxoDto.getTxHash());
     assertEquals(ACCOUNT_BALANCE_LOVELACE_AMOUNT,
         receiverUtxoDto.getAmounts().getFirst().getQuantity().toString());
-
   }
 
   @Test
@@ -78,7 +77,7 @@ class BlockServiceImplIntTest extends IntegrationTest {
     assertEquals(0, tx.getStakeRegistrations().size());
     assertEquals(0, tx.getPoolRegistrations().size());
     assertEquals(0, tx.getPoolRetirements().size());
-    assertEquals(0, tx.getDelegations().size());
+    assertEquals(0, tx.getStakePoolDelegations().size());
 
     assertNotNull(entityManager);
     BlockEntity fromBlockB = entityManager

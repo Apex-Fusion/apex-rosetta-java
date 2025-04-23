@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.cardanofoundation.rosetta.api.block.model.domain.Block;
@@ -17,7 +16,7 @@ import org.cardanofoundation.rosetta.common.services.ProtocolParamService;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+@Transactional(readOnly = true)
 public class BlockServiceImpl implements BlockService {
 
   private final LedgerBlockService ledgerBlockService;
@@ -25,15 +24,19 @@ public class BlockServiceImpl implements BlockService {
 
   @Override
   public Block findBlock(Long index, String hash) {
-    log.info("[block] Looking for block: hash={}, index={}", hash, index);
+    log.debug("[block] Looking for block: hash={}, index={}", hash, index);
+
     Optional<Block> blockOpt = ledgerBlockService.findBlock(index, hash);
     if (blockOpt.isPresent()) {
       var block = blockOpt.get();
-      log.info("Block was found, hash={}", block.getHash());
+      log.debug("Block was found, hash={}", block.getHash());
+
       block.setPoolDeposit(String.valueOf(protocolParamService.findProtocolParameters().getPoolDeposit()));
       log.debug("full data {}", block);
+
       return block;
     }
+
     log.error("Block was not found");
     throw ExceptionFactory.blockNotFoundException();
   }

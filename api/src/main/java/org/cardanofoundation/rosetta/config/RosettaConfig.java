@@ -24,7 +24,7 @@ public class RosettaConfig {
 
     public Optional<NetworkConfig> networkConfigFromNetworkRequest(final NetworkRequest networkRequest) {
         if (!networkRequest.getNetworkIdentifier().getBlockchain().equalsIgnoreCase(RosettaConstants.BLOCKCHAIN_NAME)) {
-            throw new IllegalArgumentException("Invalid blockchain specified in request. Only 'cardano' is supported by this Rosetta endpoint.");
+            throw new IllegalArgumentException("Invalid blockchain specified in request. Only 'apex' is supported by this Rosetta endpoint.");
         }
 
         return networks.stream()

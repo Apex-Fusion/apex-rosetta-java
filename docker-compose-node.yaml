@@ -1,40 +1,43 @@
-version: '3.8'
 services:
-  mithril:
-    build:
-      context: ./docker/dockerfiles/mithril
-    environment:
-      - NETWORK=${NETWORK}
-      - MITHRIL_SYNC=${MITHRIL_SYNC}
-      - SNAPSHOT_DIGEST=${SNAPSHOT_DIGEST}
-      - AGGREGATOR_ENDPOINT=${AGGREGATOR_ENDPOINT}
-      - GENESIS_VERIFICATION_KEY=${GENESIS_VERIFICATION_KEY}
-    volumes:
-      - ${CARDANO_NODE_DIR}:/node
-
   cardano-node:
     image: ghcr.io/intersectmbo/cardano-node:${CARDANO_NODE_VERSION}
     environment:
       - NETWORK=${NETWORK}
+      - CARDANO_NODE_SOCKET_PATH=/ipc/node.socket
     volumes:
-      - ${CARDANO_NODE_DIR}:/node/
+      - ${CARDANO_NODE_DIR}:/ipc/
       - ${CARDANO_NODE_DB}:/node/db
       - ${CARDANO_CONFIG}:/config
     restart: unless-stopped
     ports:
       - ${CARDANO_NODE_PORT}:${CARDANO_NODE_PORT}
-    entrypoint: cardano-node run --database-path /node/db --port ${CARDANO_NODE_PORT} --socket-path /node/node.socket --topology /config/topology.json --config /config/config.json
-    depends_on:
-      mithril:
-        condition: service_completed_successfully
+    entrypoint: cardano-node run --database-path /node/db --port ${CARDANO_NODE_PORT} --socket-path /ipc/node.socket --topology /config/topology.json --config /config/config.json
+    # entrypoint: sleep 3600
   cardano-submit-api:
     image: ghcr.io/intersectmbo/cardano-submit-api:${CARDANO_NODE_VERSION}
     environment:
       - NETWORK=${NETWORK}
     depends_on:
       - cardano-node
+    # entrypoint: sleep 3600
+    # entrypoint: [
+    #   /nix/store/79fw2gwr6sc1m9jrpd82cv3043826rji-cardano-submit-api-exe-cardano-submit-api-10.1.0/bin/cardano-submit-api
+    #   --port 8090
+    #   --socket-path /ipc/node.socket
+    #   --config /config/submit-api-config.yaml
+    #   --testnet-magic 3311
+    #   --listen-address 0.0.0.0
+    # ]
+    entrypoint: >-
+      /nix/store/79fw2gwr6sc1m9jrpd82cv3043826rji-cardano-submit-api-exe-cardano-submit-api-10.1.0/bin/cardano-submit-api
+      --port 8090
+      --socket-path /ipc/node.socket
+      --config /config/submit-api-config.yaml
+      --testnet-magic 3311
+      --listen-address 0.0.0.0
     volumes:
-      - ${CARDANO_NODE_DIR}:/node-ipc
+      - ${CARDANO_NODE_DIR}:/ipc
+      - ${CARDANO_CONFIG}:/config
     ports:
       - ${NODE_SUBMIT_API_PORT}:8090
     restart: on-failure
