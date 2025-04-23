@@ -1,16 +1,16 @@
 version: '3.8'
 services:
-  mithril:
-    build:
-      context: ./docker/dockerfiles/mithril
-    environment:
-      - NETWORK=${NETWORK}
-      - MITHRIL_SYNC=${MITHRIL_SYNC}
-      - SNAPSHOT_DIGEST=${SNAPSHOT_DIGEST}
-      - AGGREGATOR_ENDPOINT=${AGGREGATOR_ENDPOINT}
-      - GENESIS_VERIFICATION_KEY=${GENESIS_VERIFICATION_KEY}
-    volumes:
-      - ${CARDANO_NODE_DIR}:/node
+  # mithril:
+  #   build:
+  #     context: ./docker/dockerfiles/mithril
+  #   environment:
+  #     - NETWORK=${NETWORK}
+  #     - MITHRIL_SYNC=${MITHRIL_SYNC}
+  #     - SNAPSHOT_DIGEST=${SNAPSHOT_DIGEST}
+  #     - AGGREGATOR_ENDPOINT=${AGGREGATOR_ENDPOINT}
+  #     - GENESIS_VERIFICATION_KEY=${GENESIS_VERIFICATION_KEY}
+  #   volumes:
+  #     - ${CARDANO_NODE_DIR}:/node
 
   cardano-node:
     image: ghcr.io/intersectmbo/cardano-node:${CARDANO_NODE_VERSION}

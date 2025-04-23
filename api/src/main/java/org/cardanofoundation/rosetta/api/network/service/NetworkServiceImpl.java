@@ -145,6 +145,7 @@ public class NetworkServiceImpl implements NetworkService {
       case Constants.PREVIEW_NETWORK_MAGIC -> Networks.preview();
       case Constants.SANCHONET_NETWORK_MAGIC -> new Network(0b0000, Constants.SANCHONET_NETWORK_MAGIC);
       case Constants.DEVKIT_NETWORK_MAGIC -> new Network(0b0000, Constants.DEVKIT_NETWORK_MAGIC);
+      case Constants.PRIME_PUBLIC_TESTNET_NETWORK_MAGIC -> new Network(0b0000, Constants.PRIME_PUBLIC_TESTNET_NETWORK_MAGIC);
       default -> throw ExceptionFactory.invalidNetworkError();
     };
   }
@@ -201,6 +202,9 @@ public class NetworkServiceImpl implements NetworkService {
       }
       case Constants.SANCHONET_NETWORK_MAGIC -> {
         return network.equals(Constants.SANCHONET);
+      }
+      case Constants.PRIME_PUBLIC_TESTNET_NETWORK_MAGIC -> {
+        return network.equals(Constants.PRIME_PUBLIC_TESTNET);
       }
       default -> {
         return false;
