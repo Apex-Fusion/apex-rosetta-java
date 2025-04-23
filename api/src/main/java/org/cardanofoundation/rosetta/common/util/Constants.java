@@ -24,19 +24,20 @@ public class Constants {
   public static final String KEY_REFUNDS_SUM = "keyRefundsSum";
   public static final String KEY_DEPOSITS_SUM = "keyDepositsSum";
   public static final String POOL_DEPOSITS_SUM = "poolDepositsSum";
-  public static final String CARDANO_BLOCKCHAIN = "cardano";
+  public static final String CARDANO_BLOCKCHAIN = "prime";
   public static final int MAINNET_NETWORK_MAGIC = 764824073;
   public static final int PREPROD_NETWORK_MAGIC = 1;
   public static final int PREVIEW_NETWORK_MAGIC = 2;
   public static final int SANCHONET_NETWORK_MAGIC = 4;
   public static final int DEVKIT_NETWORK_MAGIC = 42;
+  public static final int PRIME_PUBLIC_TESTNET_NETWORK_MAGIC = 3311;
 
   public static final int OPERATION_TYPE_VOTE_DELEGATION = 43;
 
   private Constants() {
   }
 
-  public static final String CARDANO = "cardano";
+  public static final String CARDANO = "prime";
   public static final byte STAKE_KEY_HASH_HEADER_KIND = (byte) -32;
 
   public static final int PREFIX_LENGTH = 10;
@@ -209,6 +210,7 @@ public class Constants {
   public static final String LOVELACE = "lovelace";
   public static final String DEVKIT = "devkit";
   public static final String SANCHONET = "sanchonet";
+  public static final String PRIME_PUBLIC_TESTNET = "prime-public-testnet";
 
   public static final String ROSETTA_API_PATH = "classpath:/rosetta-specifications-1.4.15/api.yaml";
 }

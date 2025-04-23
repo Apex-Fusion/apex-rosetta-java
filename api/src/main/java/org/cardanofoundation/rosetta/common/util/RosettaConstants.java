@@ -9,7 +9,7 @@ import org.cardanofoundation.rosetta.common.exception.Error;
 
 public class RosettaConstants {
 
-  public static final String BLOCKCHAIN_NAME = "cardano";
+  public static final String BLOCKCHAIN_NAME = "prime";
 
   public static final OperationStatus INVALID_OPERATION_STATUS = buildOperationStatus("invalid",
       false);
