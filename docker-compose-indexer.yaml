@@ -1,7 +1,5 @@
-version: '3.8'
 services:
   yaci-indexer:
-    image: cardanofoundation/cardano-rosetta-java-indexer:${INDEXER_DOCKER_IMAGE_TAG}
     build:
       context: ./
       dockerfile: ./yaci-indexer/Dockerfile
@@ -28,7 +26,7 @@ services:
       SEARCH_PAGE_SIZE: ${SEARCH_PAGE_SIZE}
     volumes:
       - ${CARDANO_CONFIG}:/config
-      - ${CARDANO_NODE_DIR}:${CARDANO_NODE_DIR}
+      - ${CARDANO_NODE_DIR}:/node
     ports:
       - ${YACI_INDEXER_PORT}:9095
     restart: always
