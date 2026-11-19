@@ -9,7 +9,7 @@ on:
 jobs:
   tests:
     name: "Integration Test"
-    runs-on: ubuntu-latest
+    runs-on: nixos
     steps:
       - uses: actions/checkout@v3
       - name: "Set up environment"
