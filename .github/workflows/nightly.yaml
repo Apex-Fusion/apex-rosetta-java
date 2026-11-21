@@ -6,7 +6,7 @@ name: "Nightly"
 jobs:
   tests:
     name: "Night Dev Environment Check"
-    runs-on: nixos
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: "Install Node"

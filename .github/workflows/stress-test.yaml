@@ -4,7 +4,7 @@ on:
 
 jobs:
   artillery:
-    runs-on: nixos
+    runs-on: self-hosted
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
